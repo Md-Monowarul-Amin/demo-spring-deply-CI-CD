@@ -1,28 +1,21 @@
 package com.example.demo.service;
 
-
-import com.example.demo.dto.UserCreateRequestDTO;
-import com.example.demo.dto.UserDTO;
-import com.example.demo.dto.UserUpdateRequestDTO;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.example.demo.dto.request.UpdateUserRequest;
+import com.example.demo.dto.response.PageResponse;
+import com.example.demo.dto.response.UserResponse;
+import com.example.demo.dto.response.UserSummaryResponse;
 
 import java.util.List;
 
 public interface UserService {
 
-    UserDTO createUser(UserCreateRequestDTO requestDTO);
+    UserResponse getById(Long userId, Long currentUserId);
 
-    UserDTO getUserById(Long id);
+    UserResponse updateProfile(Long userId, UpdateUserRequest request, Long currentUserId);
 
-    // UserDTO getUserByUsername(String username);
+    List<UserSummaryResponse> searchUsers(String keyword, int limit);
 
-    UserDTO updateUser(Long id, UserUpdateRequestDTO requestDTO);
+    PageResponse<UserSummaryResponse> getFollowers(Long userId, int page, int size);
 
-    void deleteUser(Long id);
-
-    Page<UserDTO> getAllUsers(Pageable pageable);
-
-    // Optional: search
-    // List<UserDTO> searchUsers(String keyword);
+    PageResponse<UserSummaryResponse> getFollowing(Long userId, int page, int size);
 }
